@@ -51,6 +51,15 @@ namespace KRFormNet.Source
             UpdateCurrentCustomer();
         }
 
+        public Product FindProductById(int id)
+        {
+            GetAllProducts();
+            Product p = productList.Find(x => x.Id == id);
+            if (p == null)
+                return null;
+            else return p;
+        }
+
         public List<Product> GetAllProducts()
         {
             productList = new List<Product>();

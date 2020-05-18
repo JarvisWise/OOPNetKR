@@ -49,7 +49,7 @@ namespace KRFormNet.Source
         {
             Product p = productBasket.Find(x => x.Id == product.Id);
             if (p != null)
-                productBasket.Remove(product);
+                productBasket.Remove(p);
         }
 
         public Customer()//

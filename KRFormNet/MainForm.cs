@@ -56,8 +56,7 @@ namespace KRFormNet
                 {
                      product.Id, product.ProductName, product.Price, product.ProductNumber,
                      (product.Price*product.ProductNumber),
-                     "Refuse",
-                     "Buy"
+                     "Refuse"
                 });
                 //ShopTable.Rows[ShopTable.RowCount - 1].Tag = product;//
             }
@@ -114,29 +113,26 @@ namespace KRFormNet
             {
                 //delete form basket, add to products
 
-                Product toBasket = new Product(
-                    Convert.ToInt32(ShopTable.CurrentRow.Cells[0].Value),
-                    Convert.ToString(ShopTable.CurrentRow.Cells[1].Value),
-                    Convert.ToDouble(ShopTable.CurrentRow.Cells[2].Value),
-                    valueC
+                Product refuse = new Product(
+                    Convert.ToInt32(Basket.CurrentRow.Cells[0].Value),
+                    Convert.ToString(Basket.CurrentRow.Cells[1].Value),
+                    Convert.ToDouble(Basket.CurrentRow.Cells[2].Value),
+                     Convert.ToInt32(Basket.CurrentRow.Cells[3].Value)
                     );
 
-                Product toProducts = new Product(
-                   Convert.ToInt32(ShopTable.CurrentRow.Cells[0].Value),
-                   Convert.ToString(ShopTable.CurrentRow.Cells[1].Value),
-                   Convert.ToDouble(ShopTable.CurrentRow.Cells[2].Value),
-                   (value - valueC)
-                   );
+                Product formProducts = Controller.shop.FindProductById(refuse.Id);
+                formProducts.ProductNumber += refuse.ProductNumber;
 
-                //RemoveFromCurrentCustomerBasket(); 
+                Controller.shop.UpdateProduct(formProducts);
+                Controller.shop.RemoveFromCurrentCustomerBasket(refuse);
                 UpdateAllTables();
             }
 
-            if (e.ColumnIndex == 6) //buy
+            /*if (e.ColumnIndex == 6) //no need remove this
             {
                 //delete form basket
                 UpdateAllTables();
-            }
+            }*/
         }
     }
 }
