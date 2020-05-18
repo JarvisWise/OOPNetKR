@@ -18,14 +18,15 @@ namespace KRFormNet
             InitializeComponent();
         }
 
-        private void ShopTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-
+            UpdateAllTables();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {       
-            FillShopTable(Controller.shop.GetAllProducts());////////\\\\\\\\\\\\\
+        private void UpdateAllTables()
+        {
+            FillShopTable(Controller.shop.GetAllProducts());
+            FillBasket(Controller.shop.GetCurrentCustomer().ProductBasket);
         }
 
         private void FillShopTable(List<Product> products)
@@ -42,10 +43,9 @@ namespace KRFormNet
                      "Add to basket"
 
                 });
-                //ShopTable.Rows[ShopTable.RowCount - 1].Tag = product;
+                //ShopTable.Rows[ShopTable.RowCount - 1].Tag = product;//
             }
         }
-
 
         private void FillBasket(List<Product> products)
         {
@@ -59,7 +59,7 @@ namespace KRFormNet
                      "Refuse",
                      "Buy"
                 });
-                //ShopTable.Rows[ShopTable.RowCount - 1].Tag = product;
+                //ShopTable.Rows[ShopTable.RowCount - 1].Tag = product;//
             }
         }
 
@@ -82,9 +82,27 @@ namespace KRFormNet
 
             if (e.ColumnIndex == 7) //add
             {
-                Product value = (Product)ShopTable.CurrentRow.Tag;//check45
-                //add to basket
-                // change sql productNumber - ShopTable.CurrentRow.Cells[5].Value
+                int value = Convert.ToInt32(ShopTable.CurrentRow.Cells[3].Value);
+                int valueC = Convert.ToInt32(ShopTable.CurrentRow.Cells[5].Value);
+
+
+                Product toBasket = new Product(
+                    Convert.ToInt32(ShopTable.CurrentRow.Cells[0].Value),
+                    Convert.ToString(ShopTable.CurrentRow.Cells[1].Value),
+                    Convert.ToDouble(ShopTable.CurrentRow.Cells[2].Value),
+                    valueC 
+                    );
+
+                Product toProducts = new Product(
+                   Convert.ToInt32(ShopTable.CurrentRow.Cells[0].Value),
+                   Convert.ToString(ShopTable.CurrentRow.Cells[1].Value),
+                   Convert.ToDouble(ShopTable.CurrentRow.Cells[2].Value),
+                   (value - valueC)
+                   );
+
+                Controller.shop.AddToCurrentCustomerBasket(toBasket);
+                Controller.shop.UpdateProduct(toProducts);
+                UpdateAllTables();
             }
 
 
@@ -94,12 +112,30 @@ namespace KRFormNet
         {
             if (e.ColumnIndex == 5) //refuse
             {
-                //delete form basket, add to products, update
+                //delete form basket, add to products
+
+                Product toBasket = new Product(
+                    Convert.ToInt32(ShopTable.CurrentRow.Cells[0].Value),
+                    Convert.ToString(ShopTable.CurrentRow.Cells[1].Value),
+                    Convert.ToDouble(ShopTable.CurrentRow.Cells[2].Value),
+                    valueC
+                    );
+
+                Product toProducts = new Product(
+                   Convert.ToInt32(ShopTable.CurrentRow.Cells[0].Value),
+                   Convert.ToString(ShopTable.CurrentRow.Cells[1].Value),
+                   Convert.ToDouble(ShopTable.CurrentRow.Cells[2].Value),
+                   (value - valueC)
+                   );
+
+                //RemoveFromCurrentCustomerBasket(); 
+                UpdateAllTables();
             }
 
             if (e.ColumnIndex == 6) //buy
             {
-                //delete form basket, update
+                //delete form basket
+                UpdateAllTables();
             }
         }
     }

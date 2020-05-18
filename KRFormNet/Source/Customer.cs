@@ -16,6 +16,10 @@ namespace KRFormNet.Source
         private DateTime DOB = new DateTime();//
         private List<Product> productBasket = new List<Product>();
 
+        public int Id
+        {
+            get { return id; }
+        }
         public String FirstName
         {
             get { return firstName; }
@@ -28,10 +32,24 @@ namespace KRFormNet.Source
         {
             get { return thirdName; }
         }
+        public List<Product> ProductBasket
+        {
+            get { return productBasket; }
+        }
 
         public void AddToBasket(Product product)
         {
-            //Product p = productBasket.Find(product);
+            Product p = productBasket.Find(x => x.Id == product.Id);
+            if (p == null)
+                productBasket.Add(product);
+            else p.ProductNumber +=product.ProductNumber;
+        }
+
+        public void RemoveFromBasket(Product product)
+        {
+            Product p = productBasket.Find(x => x.Id == product.Id);
+            if (p != null)
+                productBasket.Remove(product);
         }
 
         public Customer()//
@@ -68,11 +86,14 @@ namespace KRFormNet.Source
 
         public static Customer CustomerReader(IDataReader reader)
         {
-            string[] list = Convert.ToString(reader["productBasket"]).Split(';');
             List<Product> basket = new List<Product>();
-            for (int i = 0; i != list.Length; i++)
+            if (reader["productBasket"] != null && Convert.ToString(reader["productBasket"])!="-")
             {
-                basket.Add(Product.ToProduct(list[i]));
+                string[] list = Convert.ToString(reader["productBasket"]).Split(';');
+                for (int i = 0; i != list.Length; i++)
+                {
+                    basket.Add(Product.ToProduct(list[i]));
+                }
             }
 
             return new Customer(Convert.ToInt32(reader["Id"]),

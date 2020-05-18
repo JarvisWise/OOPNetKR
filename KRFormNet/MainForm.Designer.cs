@@ -153,7 +153,6 @@
             this.ShopTable.Size = new System.Drawing.Size(801, 394);
             this.ShopTable.TabIndex = 0;
             this.ShopTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShopTable_CellClick);
-            this.ShopTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShopTable_CellContentClick);
             // 
             // Id
             // 
@@ -291,6 +290,7 @@
             this.Basket.RowHeadersVisible = false;
             this.Basket.Size = new System.Drawing.Size(801, 394);
             this.Basket.TabIndex = 1;
+            this.Basket.UseWaitCursor = true;
             this.Basket.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Basket_CellClick);
             // 
             // dataGridViewTextBoxColumn1

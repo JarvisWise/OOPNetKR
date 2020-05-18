@@ -36,7 +36,7 @@ namespace KRFormNet.Source
             set { productNumber = value; }
         }
 
-        public Product()//
+        public Product()
         {
             id = 0;
             productName = String.Empty;
@@ -75,14 +75,6 @@ namespace KRFormNet.Source
                 Convert.ToInt32(reader["productNumber"]));
         }
 
-        /*public static Product ProductReader(IDataReader reader)
-        {
-            return new Product((int)reader["Id"],
-                (string)reader["productName"],
-                (double)reader["price"],
-                (int)reader["productNumber"]);
-        }*/
-
         public override string ToString()
         {
             return id + ":"+ productName + ":"+price+":"+ productNumber;
@@ -94,10 +86,32 @@ namespace KRFormNet.Source
             return new Product(Int32.Parse(line[0]), line[1], Double.Parse(line[2]), Int32.Parse(line[3]));
         }
 
-        public override bool Equals(object obj)
+        /*public override bool Equals(object obj)//
         {
             Product p = (Product)obj;
             return id.Equals(p.id) && productName.Equals(p.productName) && price.Equals(p.price);
+        }*/
+
+        public static String ProductListToString(List<Product> products)
+        {
+            if (products == null || products.Count == 0)
+                return "-";
+            else {
+                string line = String.Empty;
+                for(int i=0;i!=products.Count;i++)
+                {
+                    line += products[i].ToString();
+                    if (i != products.Count - 1)
+                        line += ";";
+                }
+
+                /*foreach(Product product in products)
+                {
+                    line += (product.ToString() + ";");
+                }*/
+
+                return line;
+            }
         }
 
     }
