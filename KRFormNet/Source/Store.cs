@@ -13,46 +13,30 @@ namespace KRFormNet.Source
     {
         private String shopName;
         private String shopInfo;
-
-        //add time of work
-        private int startDay = 6;
-        private int endDay = 23;
-        //private DateTime startDay = new DateTime();//new DateTime(0000, 0, 0, 6, 0, 0);//
-        //private DateTime endDay = new DateTime();//new DateTime(0000, 0, 0, 23, 00, 0);//
-        //private DateTime startDay = new DateTime(0000, 0, 0, 6, 0, 0);//
-        //private DateTime endDay = new DateTime(0000, 0, 0, 23, 00, 0);//
-
-        //
+        private int startDay;
+        private int endDay;
 
         private List<Product> productList;
         private Customer currentCustomer;
 
         public Store()//
         {
-            shopName = String.Empty;
-            shopInfo = String.Empty;
-
-            //startDay = new DateTime();//
-            //endDay = new DateTime();//
-
-            //startDay = new DateTime(0000, 0, 0, 6, 0, 0);//
-            //endDay = new DateTime(0000, 0, 0, 23, 00, 0);//
-
-        productList = new List<Product>();
+            ReadStoreInfo();
+            productList = new List<Product>();
             currentCustomer = new Customer();
         }
 
-        public Store(String shop)///
+        public String ShopName
         {
-            //read
+            get { return shopName; }
         }
 
-        //add time of work
-        //private DateTime startDay = new DateTime();//
-        //private DateTime endDay = new DateTime();//
-        //
+        public String ShopInfo
+        {
+            get { return shopInfo; }
+        }
 
-         public int StartDay
+        public int StartDay
          {
             get { return startDay; }
          }
@@ -66,6 +50,19 @@ namespace KRFormNet.Source
         public DateTime GetCurrentCustomerDOB()
         {
             return currentCustomer.GetDOB;
+        }
+
+        public String GetCurrentCustomerFName()
+        {
+            return currentCustomer.FirstName;
+        }
+        public String GetCurrentCustomerSName()
+        {
+            return currentCustomer.SecondName;
+        }
+        public String GetCurrentCustomerTName()
+        {
+            return currentCustomer.ThirdName;
         }
 
         public void ClearCurrentBasket()
@@ -126,6 +123,27 @@ namespace KRFormNet.Source
             }
             return currentCustomer;
         }
+
+        public void ReadStoreInfo()
+        {
+            using (SqlConnection connection = new SqlConnection(Controller.connString))//
+            using (SqlCommand command = new SqlCommand("SELECT * FROM [StoreInfo]", connection))//
+            {
+                connection.Open();
+                using (SqlDataReader sqlReader = command.ExecuteReader())
+                {
+                    if (sqlReader.Read())
+                    {
+                        shopName = Convert.ToString(sqlReader["shopName"]);
+                        shopInfo = Convert.ToString(sqlReader["shopInfo"]);
+                        startDay = Convert.ToInt32(sqlReader["startDay"]);
+                        endDay = Convert.ToInt32(sqlReader["endDay"]);
+                    }
+                    else { }//
+                }
+            }
+        }
+
 
 
         public void UpdateCurrentCustomer()

@@ -13,9 +13,8 @@ namespace KRFormNet
 {
     class Controller
     {
-        public static Store shop= new Store();
         public static string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\User\source\repos\KRFormNet\KRFormNet\Databases\Products.mdf;Integrated Security=True";
-    
+        public static Store shop = new Store();
 
         /*public async static void ControllerInit()
         {

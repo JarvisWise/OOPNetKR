@@ -21,22 +21,8 @@ namespace KRFormNet
         private void MainForm_Load(object sender, EventArgs e)
         {
             UpdateAllTables();
+            SetInfo();
         }
-
-
-        /*public void ReloadData()
-         {
-             if (txtSearch.Text.Trim().Length > 0)
-             {
-                 List<User> users = _userRepository.GetAllUsers();
-                 PopulateData(users.FindAll(user => user.ToString().ToUpper().Contains(txtSearch.Text.ToUpper())));
-             }
-             else
-             {
-                 PopulateData(_userRepository.GetAllUsers());
-             }
-         }*/
-        //SearchByName
 
         private void UpdateAllTables()
         {
@@ -204,6 +190,19 @@ namespace KRFormNet
         private void SearchByName_TextChanged(object sender, EventArgs e)
         {
             UpdateAllTables();
+        }
+
+        private void SetInfo()
+        {
+            ShopNameTextBox.Text = Controller.shop.ShopName;
+            StartTimeTextBox.Text = Controller.shop.StartDay.ToString();
+            EndTimeTextBox.Text = Controller.shop.EndDay.ToString();
+            DInfoTextBox.Text = Controller.shop.ShopInfo;
+
+            FNameTextBox.Text = Controller.shop.GetCurrentCustomerFName();
+            SNameTextBox.Text = Controller.shop.GetCurrentCustomerSName();
+            TNameTextBox.Text = Controller.shop.GetCurrentCustomerTName();
+            DOBTextBox.Text = Controller.shop.GetCurrentCustomerDOB().ToString("MM/dd/yyyy");
         }
     }
 }
