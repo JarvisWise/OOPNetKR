@@ -86,12 +86,6 @@ namespace KRFormNet.Source
             return new Product(Int32.Parse(line[0]), line[1], Double.Parse(line[2]), Int32.Parse(line[3]));
         }
 
-        /*public override bool Equals(object obj)//
-        {
-            Product p = (Product)obj;
-            return id.Equals(p.id) && productName.Equals(p.productName) && price.Equals(p.price);
-        }*/
-
         public static String ProductListToString(List<Product> products)
         {
             if (products == null || products.Count == 0)
@@ -104,12 +98,6 @@ namespace KRFormNet.Source
                     if (i != products.Count - 1)
                         line += ";";
                 }
-
-                /*foreach(Product product in products)
-                {
-                    line += (product.ToString() + ";");
-                }*/
-
                 return line;
             }
         }

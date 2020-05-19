@@ -57,12 +57,12 @@ namespace KRFormNet.Source
                 productBasket.Remove(p);
         }
 
-        public Customer()//
+        public Customer()
         {
             firstName = String.Empty;
             secondName = String.Empty;
             thirdName = String.Empty;
-            DOB = new DateTime();//
+            DOB = new DateTime();
             productBasket = new List<Product>();
         }
 
@@ -100,7 +100,6 @@ namespace KRFormNet.Source
                     basket.Add(Product.ToProduct(list[i]));
                 }
             }
-
             return new Customer(Convert.ToInt32(reader["Id"]),
                 Convert.ToString(reader["firstName"]),
                 Convert.ToString(reader["secondName"]),

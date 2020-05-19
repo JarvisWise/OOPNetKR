@@ -148,8 +148,6 @@ namespace KRFormNet
         {
             if (e.ColumnIndex == 5) //refuse
             {
-                //delete form basket, add to products
-
                 Product refuse = new Product(
                     Convert.ToInt32(Basket.CurrentRow.Cells[0].Value),
                     Convert.ToString(Basket.CurrentRow.Cells[1].Value),
@@ -164,12 +162,6 @@ namespace KRFormNet
                 Controller.shop.RemoveFromCurrentCustomerBasket(refuse);
                 UpdateAllTables();
             }
-
-            /*if (e.ColumnIndex == 6) //no need remove this
-            {
-                //delete form basket
-                UpdateAllTables();
-            }*/
         }
 
         private void BuyButton_Click(object sender, EventArgs e)

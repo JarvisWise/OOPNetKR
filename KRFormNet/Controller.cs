@@ -15,40 +15,5 @@ namespace KRFormNet
     {
         public static string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\User\source\repos\KRFormNet\KRFormNet\Databases\Products.mdf;Integrated Security=True";
         public static Store shop = new Store();
-
-        /*public async static void ControllerInit()
-        {
-            //add name
-            //add info 
-            // add customers
-
-            String connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\User\source\repos\KRFormNet\KRFormNet\Databases\Products.mdf;Integrated Security=True";
-            productsSqlConnection = new SqlConnection(connString);
-
-
-
-            await productsSqlConnection.OpenAsync();
-            SqlDataReader sqlReader = null;
-            SqlCommand comm = new SqlCommand("SELECT * FROM [Products]", productsSqlConnection);
-
-            try
-            {
-                // read product list
-                sqlReader = await comm.ExecuteReaderAsync();
-
-                while (await sqlReader.ReadAsync())
-                {
-                    shop.AddProduct(new Product(Convert.ToInt32(sqlReader["Id"]), Convert.ToString(sqlReader["productName"]), Convert.ToDouble(sqlReader["price"]), Convert.ToInt32(sqlReader["productNumber"])));
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message.ToString());//
-            }
-            finally {
-                if (sqlReader != null)
-                    sqlReader.Close();
-            }
-        }*/
     }
 }

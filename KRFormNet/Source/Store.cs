@@ -169,17 +169,5 @@ namespace KRFormNet.Source
                 command.ExecuteNonQuery();
             }
         }
-
-        /*public void AddOrder(Customer user, Product product)
-        {
-            //add validate
-            activeOrders[user].Add(product);
-        }
-
-        public void DeleteOrder(Customer user, Product product)
-        {
-            if (!activeOrders[user].Remove(product))
-                throw new Exception(); // add format
-        }*/
     }
 }
