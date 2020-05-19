@@ -37,6 +37,11 @@ namespace KRFormNet.Source
             get { return productBasket; }
         }
 
+        public DateTime GetDOB
+        {
+            get { return DOB; }
+        }
+
         public void AddToBasket(Product product)
         {
             Product p = productBasket.Find(x => x.Id == product.Id);
@@ -87,7 +92,7 @@ namespace KRFormNet.Source
         public static Customer CustomerReader(IDataReader reader)
         {
             List<Product> basket = new List<Product>();
-            if (reader["productBasket"] != null && Convert.ToString(reader["productBasket"])!="-")
+            if (reader["productBasket"] != null && Convert.ToString(reader["productBasket"])[0]!='-')
             {
                 string[] list = Convert.ToString(reader["productBasket"]).Split(';');
                 for (int i = 0; i != list.Length; i++)

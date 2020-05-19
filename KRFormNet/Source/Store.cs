@@ -15,8 +15,13 @@ namespace KRFormNet.Source
         private String shopInfo;
 
         //add time of work
-        private DateTime startDay = new DateTime();//
-        private DateTime endDay = new DateTime();//
+        private int startDay = 6;
+        private int endDay = 23;
+        //private DateTime startDay = new DateTime();//new DateTime(0000, 0, 0, 6, 0, 0);//
+        //private DateTime endDay = new DateTime();//new DateTime(0000, 0, 0, 23, 00, 0);//
+        //private DateTime startDay = new DateTime(0000, 0, 0, 6, 0, 0);//
+        //private DateTime endDay = new DateTime(0000, 0, 0, 23, 00, 0);//
+
         //
 
         private List<Product> productList;
@@ -27,16 +32,46 @@ namespace KRFormNet.Source
             shopName = String.Empty;
             shopInfo = String.Empty;
 
-            startDay = new DateTime();//
-            endDay = new DateTime();//
+            //startDay = new DateTime();//
+            //endDay = new DateTime();//
 
-            productList = new List<Product>();
+            //startDay = new DateTime(0000, 0, 0, 6, 0, 0);//
+            //endDay = new DateTime(0000, 0, 0, 23, 00, 0);//
+
+        productList = new List<Product>();
             currentCustomer = new Customer();
         }
 
         public Store(String shop)///
         {
             //read
+        }
+
+        //add time of work
+        //private DateTime startDay = new DateTime();//
+        //private DateTime endDay = new DateTime();//
+        //
+
+         public int StartDay
+         {
+            get { return startDay; }
+         }
+
+        public int EndDay
+        {
+            get { return endDay; }
+        }
+
+
+        public DateTime GetCurrentCustomerDOB()
+        {
+            return currentCustomer.GetDOB;
+        }
+
+        public void ClearCurrentBasket()
+        {
+            currentCustomer.ProductBasket.Clear();
+            UpdateCurrentCustomer();
         }
 
         public void AddToCurrentCustomerBasket(Product product)
@@ -115,11 +150,6 @@ namespace KRFormNet.Source
                 command.Parameters.AddWithValue("@productNumber", product.ProductNumber);
                 command.ExecuteNonQuery();
             }
-        }
-
-        public void AddProduct(Product p)
-        {
-            productList.Add(p);
         }
 
         /*public void AddOrder(Customer user, Product product)

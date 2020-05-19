@@ -25,7 +25,10 @@ namespace KRFormNet
 
         private void UpdateAllTables()
         {
+
             FillShopTable(Controller.shop.GetAllProducts());
+
+
             FillBasket(Controller.shop.GetCurrentCustomer().ProductBasket);
         }
 
@@ -43,13 +46,16 @@ namespace KRFormNet
                      "Add to basket"
 
                 });
-                //ShopTable.Rows[ShopTable.RowCount - 1].Tag = product;//
             }
         }
 
         private void FillBasket(List<Product> products)
         {
             Basket.Rows.Clear();
+
+            double costWithoutDiscount = 0;
+            double costWithDiscount = 0;
+            int totalProductNumber = 0;
             foreach (Product product in products)
             {
                 Basket.Rows.Add(new object[]
@@ -58,8 +64,33 @@ namespace KRFormNet
                      (product.Price*product.ProductNumber),
                      "Refuse"
                 });
-                //ShopTable.Rows[ShopTable.RowCount - 1].Tag = product;//
+                costWithoutDiscount += product.Price * product.ProductNumber;
+                totalProductNumber += product.ProductNumber;
             }
+
+            if (costWithoutDiscount != 0)
+                costWithoutDiscount += 100;//доставка
+
+            /*   if (DateTime.Now.DayOfYear == Controller.shop.GetCurrentCustomerDOB().DayOfYear ||
+                DateTime.Now.DayOfYear == Controller.shop.GetCurrentCustomerDOB().DayOfYear+1 ||
+                DateTime.Now.DayOfYear == Controller.shop.GetCurrentCustomerDOB().DayOfYear+)*/
+
+            if (DateTime.Now.DayOfYear - Controller.shop.GetCurrentCustomerDOB().DayOfYear >= 0 &&
+                DateTime.Now.DayOfYear - Controller.shop.GetCurrentCustomerDOB().DayOfYear <=3)
+            {
+                costWithDiscount = costWithoutDiscount * 0.9;
+            }
+            else {
+                if (costWithoutDiscount < 1000)
+                    costWithDiscount = costWithoutDiscount;
+                else if (costWithoutDiscount < 9000)
+                    costWithDiscount = costWithoutDiscount * 0.95;
+                else costWithDiscount = costWithoutDiscount * 0.92;
+            }
+
+                TotalNumberLabel.Text = totalProductNumber.ToString();
+            WithoutDiscount.Text = costWithoutDiscount.ToString();
+            WithDiscount.Text = costWithDiscount.ToString();
         }
 
         private void ShopTable_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -133,6 +164,21 @@ namespace KRFormNet
                 //delete form basket
                 UpdateAllTables();
             }*/
+        }
+
+        private void BuyButton_Click(object sender, EventArgs e)
+        {
+            if (DateTime.Now.Hour >= Controller.shop.StartDay && DateTime.Now.Hour <= Controller.shop.EndDay)
+            {
+
+                Controller.shop.ClearCurrentBasket();
+                UpdateAllTables();
+                MessageBox.Show("Purchase operation completed successfully");
+            }
+            else {
+                MessageBox.Show("Sorry our store is closed, try during business hours("+ Controller.shop.StartDay.ToString("0.00") + " - "+ Controller.shop.EndDay.ToString("0.00") + ")");
+            }
+
         }
     }
 }

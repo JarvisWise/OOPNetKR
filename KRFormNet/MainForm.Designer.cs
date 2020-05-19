@@ -50,7 +50,15 @@
             this.Minus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Add = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShopInfoTab = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.BasketTab = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.TotalNumberLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.WithDiscount = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.WithoutDiscount = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BuyButton = new System.Windows.Forms.Button();
             this.Basket = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,7 +70,8 @@
             this.windows.SuspendLayout();
             this.ShopTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShopTable)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.BasketTab.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Basket)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,8 +101,8 @@
             // windows
             // 
             this.windows.Controls.Add(this.ShopTab);
+            this.windows.Controls.Add(this.BasketTab);
             this.windows.Controls.Add(this.ShopInfoTab);
-            this.windows.Controls.Add(this.tabPage2);
             this.windows.Dock = System.Windows.Forms.DockStyle.Fill;
             this.windows.Location = new System.Drawing.Point(0, 24);
             this.windows.Name = "windows";
@@ -240,17 +249,96 @@
             this.ShopInfoTab.Text = "Information";
             this.ShopInfoTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // BasketTab
             // 
-            this.tabPage2.Controls.Add(this.Basket);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(807, 400);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Basket";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.UseWaitCursor = true;
+            this.BasketTab.Controls.Add(this.panel1);
+            this.BasketTab.Controls.Add(this.Basket);
+            this.BasketTab.Cursor = System.Windows.Forms.Cursors.Default;
+            this.BasketTab.Location = new System.Drawing.Point(4, 22);
+            this.BasketTab.Name = "BasketTab";
+            this.BasketTab.Padding = new System.Windows.Forms.Padding(3);
+            this.BasketTab.Size = new System.Drawing.Size(807, 400);
+            this.BasketTab.TabIndex = 1;
+            this.BasketTab.Text = "Basket";
+            this.BasketTab.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.TotalNumberLabel);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.WithDiscount);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.WithoutDiscount);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.BuyButton);
+            this.panel1.Location = new System.Drawing.Point(8, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(791, 36);
+            this.panel1.TabIndex = 1;
+            // 
+            // TotalNumberLabel
+            // 
+            this.TotalNumberLabel.AutoSize = true;
+            this.TotalNumberLabel.Location = new System.Drawing.Point(152, 12);
+            this.TotalNumberLabel.Name = "TotalNumberLabel";
+            this.TotalNumberLabel.Size = new System.Drawing.Size(13, 13);
+            this.TotalNumberLabel.TabIndex = 8;
+            this.TotalNumberLabel.Text = "[]";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 12);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(128, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Total number of products:";
+            // 
+            // WithDiscount
+            // 
+            this.WithDiscount.AutoSize = true;
+            this.WithDiscount.Location = new System.Drawing.Point(579, 12);
+            this.WithDiscount.Name = "WithDiscount";
+            this.WithDiscount.Size = new System.Drawing.Size(13, 13);
+            this.WithDiscount.TabIndex = 6;
+            this.WithDiscount.Text = "[]";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(477, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(96, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Cost with discount:";
+            // 
+            // WithoutDiscount
+            // 
+            this.WithoutDiscount.AutoSize = true;
+            this.WithoutDiscount.Location = new System.Drawing.Point(372, 12);
+            this.WithoutDiscount.Name = "WithoutDiscount";
+            this.WithoutDiscount.Size = new System.Drawing.Size(13, 13);
+            this.WithoutDiscount.TabIndex = 4;
+            this.WithoutDiscount.Text = "[]";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(255, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Cost without discount:";
+            // 
+            // BuyButton
+            // 
+            this.BuyButton.Location = new System.Drawing.Point(675, 7);
+            this.BuyButton.Name = "BuyButton";
+            this.BuyButton.Size = new System.Drawing.Size(75, 23);
+            this.BuyButton.TabIndex = 2;
+            this.BuyButton.Text = "Buy";
+            this.BuyButton.UseVisualStyleBackColor = true;
+            this.BuyButton.Click += new System.EventHandler(this.BuyButton_Click);
             // 
             // Basket
             // 
@@ -278,15 +366,15 @@
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn7});
             this.Basket.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.Basket.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Basket.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Basket.EnableHeadersVisualStyles = false;
             this.Basket.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Basket.Location = new System.Drawing.Point(3, 3);
+            this.Basket.Location = new System.Drawing.Point(3, 48);
             this.Basket.Name = "Basket";
             this.Basket.ReadOnly = true;
             this.Basket.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.Basket.RowHeadersVisible = false;
-            this.Basket.Size = new System.Drawing.Size(801, 394);
+            this.Basket.Size = new System.Drawing.Size(801, 349);
             this.Basket.TabIndex = 0;
             this.Basket.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Basket_CellClick);
             // 
@@ -370,7 +458,9 @@
             this.windows.ResumeLayout(false);
             this.ShopTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ShopTable)).EndInit();
-            this.tabPage2.ResumeLayout(false);
+            this.BasketTab.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Basket)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -385,7 +475,7 @@
         private System.Windows.Forms.TabControl windows;
         private System.Windows.Forms.TabPage ShopTab;
         private System.Windows.Forms.TabPage ShopInfoTab;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage BasketTab;
         private System.Windows.Forms.DataGridView ShopTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
@@ -402,6 +492,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button BuyButton;
+        private System.Windows.Forms.Label WithDiscount;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label WithoutDiscount;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label TotalNumberLabel;
+        private System.Windows.Forms.Label label5;
     }
 }
 
