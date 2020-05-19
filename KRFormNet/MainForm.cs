@@ -23,13 +23,33 @@ namespace KRFormNet
             UpdateAllTables();
         }
 
+
+        /*public void ReloadData()
+         {
+             if (txtSearch.Text.Trim().Length > 0)
+             {
+                 List<User> users = _userRepository.GetAllUsers();
+                 PopulateData(users.FindAll(user => user.ToString().ToUpper().Contains(txtSearch.Text.ToUpper())));
+             }
+             else
+             {
+                 PopulateData(_userRepository.GetAllUsers());
+             }
+         }*/
+        //SearchByName
+
         private void UpdateAllTables()
         {
-
-            FillShopTable(Controller.shop.GetAllProducts());
-
-
-            FillBasket(Controller.shop.GetCurrentCustomer().ProductBasket);
+            if (SearchByName.Text.Trim().Length > 0)
+            {
+                List<Product> products = Controller.shop.GetAllProducts();
+                FillShopTable(products.FindAll(p => p.ProductName.ToUpper().Contains(SearchByName.Text.ToUpper())));
+            }
+            else
+            {
+                FillShopTable(Controller.shop.GetAllProducts());
+            }
+                FillBasket(Controller.shop.GetCurrentCustomer().ProductBasket);
         }
 
         private void FillShopTable(List<Product> products)
@@ -179,6 +199,11 @@ namespace KRFormNet
                 MessageBox.Show("Sorry our store is closed, try during business hours("+ Controller.shop.StartDay.ToString("0.00") + " - "+ Controller.shop.EndDay.ToString("0.00") + ")");
             }
 
+        }
+
+        private void SearchByName_TextChanged(object sender, EventArgs e)
+        {
+            UpdateAllTables();
         }
     }
 }
