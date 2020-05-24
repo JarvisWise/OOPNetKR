@@ -15,7 +15,6 @@ namespace KRFormNet.Source
         private String shopInfo;
         private int startDay;
         private int endDay;
-
         private List<Product> productList;
         private Customer currentCustomer;
 
@@ -63,6 +62,11 @@ namespace KRFormNet.Source
         public String GetCurrentCustomerTName()
         {
             return currentCustomer.ThirdName;
+        }
+
+        public String GetCurrentCustomerTown()
+        {
+            return currentCustomer.Town;
         }
 
         public void ClearCurrentBasket()

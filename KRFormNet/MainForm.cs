@@ -77,10 +77,6 @@ namespace KRFormNet
             if (costWithoutDiscount != 0)
                 costWithoutDiscount += 100;//доставка
 
-            /*   if (DateTime.Now.DayOfYear == Controller.shop.GetCurrentCustomerDOB().DayOfYear ||
-                DateTime.Now.DayOfYear == Controller.shop.GetCurrentCustomerDOB().DayOfYear+1 ||
-                DateTime.Now.DayOfYear == Controller.shop.GetCurrentCustomerDOB().DayOfYear+)*/
-
             if (DateTime.Now.DayOfYear - Controller.shop.GetCurrentCustomerDOB().DayOfYear >= 0 &&
                 DateTime.Now.DayOfYear - Controller.shop.GetCurrentCustomerDOB().DayOfYear <=3)
             {
@@ -194,6 +190,7 @@ namespace KRFormNet
             FNameTextBox.Text = Controller.shop.GetCurrentCustomerFName();
             SNameTextBox.Text = Controller.shop.GetCurrentCustomerSName();
             TNameTextBox.Text = Controller.shop.GetCurrentCustomerTName();
+            TownTextBox.Text = Controller.shop.GetCurrentCustomerTown();
             DOBTextBox.Text = Controller.shop.GetCurrentCustomerDOB().ToString("MM/dd/yyyy");
         }
     }

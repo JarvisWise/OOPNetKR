@@ -13,8 +13,45 @@ namespace KRFormNet.Source
         private String firstName = String.Empty;
         private String secondName = String.Empty;
         private String thirdName = String.Empty;
-        private DateTime DOB = new DateTime();//
+        private String town = String.Empty;
+        private DateTime DOB = new DateTime();
         private List<Product> productBasket = new List<Product>();
+
+        public Customer()
+        {
+            firstName = String.Empty;
+            secondName = String.Empty;
+            thirdName = String.Empty;
+            town = String.Empty;
+            DOB = new DateTime();
+            productBasket = new List<Product>();
+        }
+
+
+        public Customer(int id, String firstName, String secondName, String thirdName, String town, DateTime DOB, List<Product> productBasket)
+        {
+            if (id > 0) this.id = id;
+            else id = 0;
+
+            if (String.IsNullOrEmpty(firstName)) this.firstName = "";
+            else this.firstName = firstName;
+
+            if (String.IsNullOrEmpty(secondName)) this.secondName ="";
+            else this.secondName = secondName;
+
+            if (String.IsNullOrEmpty(thirdName)) this.thirdName = "";
+            else this.thirdName = thirdName;
+
+            if (String.IsNullOrEmpty(town)) this.town = "";
+            else this.town = town;
+
+            if (DOB != null) this.DOB = DOB;
+            else this.DOB = new DateTime();
+
+            if (productBasket != null) this.productBasket = productBasket;
+            else this.productBasket = new List<Product>();
+
+        }
 
         public int Id
         {
@@ -31,6 +68,10 @@ namespace KRFormNet.Source
         public String ThirdName
         {
             get { return thirdName; }
+        }
+        public String Town
+        {
+            get { return town; }
         }
         public List<Product> ProductBasket
         {
@@ -57,37 +98,7 @@ namespace KRFormNet.Source
                 productBasket.Remove(p);
         }
 
-        public Customer()
-        {
-            firstName = String.Empty;
-            secondName = String.Empty;
-            thirdName = String.Empty;
-            DOB = new DateTime();
-            productBasket = new List<Product>();
-        }
-
-      
-        public Customer(int id, String firstName, String secondName, String thirdName, DateTime DOB, List<Product> productBasket) 
-        {
-            if (id > 0) this.id = id;
-            else ;//
-            
-            if (String.IsNullOrEmpty(firstName)) throw new Exception();///formatException
-            else this.firstName = firstName;
-
-            if (String.IsNullOrEmpty(secondName)) throw new Exception();///formatException
-            else this.secondName = secondName;
-
-            if (String.IsNullOrEmpty(thirdName)) throw new Exception();///formatException
-            else this.thirdName = thirdName;
-
-            if (DOB != null) this.DOB = DOB;
-            else this.DOB = new DateTime();
-
-            if (productBasket != null) this.productBasket = productBasket;
-            else this.productBasket = new List<Product>();
-
-        }
+        
 
         public static Customer CustomerReader(IDataReader reader)
         {
@@ -104,6 +115,7 @@ namespace KRFormNet.Source
                 Convert.ToString(reader["firstName"]),
                 Convert.ToString(reader["secondName"]),
                 Convert.ToString(reader["thirdName"]),
+                Convert.ToString(reader["town"]),
                 Convert.ToDateTime(reader["DOB"]),
                 basket
                 );
