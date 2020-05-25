@@ -20,11 +20,18 @@ namespace KRFormNet
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            UpdateAllTables();
-            SetInfo();
+            if (Controller.currentCustomerId <= 0)
+            {
+                new Registration(this).ShowDialog();
+            }
+            else
+            {
+                UpdateAllTables();
+                SetInfo();
+            }
         }
 
-        private void UpdateAllTables()
+        public void UpdateAllTables()
         {
             if (SearchByName.Text.Trim().Length > 0)
             {
@@ -162,15 +169,24 @@ namespace KRFormNet
 
         private void BuyButton_Click(object sender, EventArgs e)
         {
-            if (DateTime.Now.Hour >= Controller.shop.StartDay && DateTime.Now.Hour <= Controller.shop.EndDay)
-            {
 
-                Controller.shop.ClearCurrentBasket();
-                UpdateAllTables();
-                MessageBox.Show("Purchase operation completed successfully");
+            if (TotalNumberLabel.Text == "0")
+            {
+                MessageBox.Show("You don't have products in busket!");
             }
-            else {
-                MessageBox.Show("Sorry our store is closed, try during business hours("+ Controller.shop.StartDay.ToString("0.00") + " - "+ Controller.shop.EndDay.ToString("0.00") + ")");
+            else
+            {
+                if (DateTime.Now.Hour >= Controller.shop.StartDay && DateTime.Now.Hour <= Controller.shop.EndDay)
+                {
+
+                    Controller.shop.ClearCurrentBasket();
+                    UpdateAllTables();
+                    MessageBox.Show("Purchase operation completed successfully");
+                }
+                else
+                {
+                    MessageBox.Show("Sorry our store is closed, try during business hours(" + Controller.shop.StartDay.ToString("0.00") + " - " + Controller.shop.EndDay.ToString("0.00") + ")");
+                }
             }
 
         }
@@ -180,7 +196,7 @@ namespace KRFormNet
             UpdateAllTables();
         }
 
-        private void SetInfo()
+        public void SetInfo()
         {
             ShopNameTextBox.Text = Controller.shop.ShopName;
             StartTimeTextBox.Text = Controller.shop.StartDay.ToString();
@@ -192,6 +208,16 @@ namespace KRFormNet
             TNameTextBox.Text = Controller.shop.GetCurrentCustomerTName();
             TownTextBox.Text = Controller.shop.GetCurrentCustomerTown();
             DOBTextBox.Text = Controller.shop.GetCurrentCustomerDOB().ToString("MM/dd/yyyy");
+        }
+
+        private void AddCustomerButton_Click(object sender, EventArgs e)
+        {
+            new Registration(this).ShowDialog();
+        }
+
+        private void ChangeCustomerButton_Click(object sender, EventArgs e)
+        {
+            new ChangeCustomer(this).ShowDialog();
         }
     }
 }

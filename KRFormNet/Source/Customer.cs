@@ -120,5 +120,10 @@ namespace KRFormNet.Source
                 basket
                 );
         }
+
+        public override string ToString()
+        {
+            return firstName + " " + secondName;
+        }
     }
 }
